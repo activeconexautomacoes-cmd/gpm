@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 210 100% 70%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 262 83% 58%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 10% 95.9%;
+    --sidebar-accent-foreground: 210 5.9% 10%;
+    --sidebar-border: 210 5.9% 90%;
+    --sidebar-ring: 210 100% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 50%), hsl(210 80% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(200 90% 40%) 100%);
+    --shadow-elegant: 0 10px 30px -10px hsl(210 100% 50% / 0.3);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --stage-new-lead: 220 91% 64%;
+    --stage-qualification: 270 91% 65%;
+    --stage-session: 330 81% 60%;
+    --stage-negotiation: 43 96% 56%;
+    --stage-proposal: 142 76% 36%;
+    --stage-closing: 217 91% 60%;
+    --stage-won: 142 71% 45%;
+    --stage-lost: 0 84% 60%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 10% 95.9%;
+    --secondary-foreground: 210 10% 10%;
+    --muted: 210 10% 95.9%;
+    --muted-foreground: 210 10% 46.1%;
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 10% 90%;
+    --input: 210 10% 90%;
+    --ring: 210 100% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 210 40% 98%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 90% 60%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 210 100% 50%;
+
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 0 0% 8%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 0 0% 10%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 10%;
+    --ring: 210 90% 60%;
+
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 90% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 20% 10%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 210 20% 15%;
+    --sidebar-ring: 210 90% 60%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 50%), hsl(190 100% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(230 90% 40%) 100%);
+    --shadow-elegant: 0 10px 40px -10px hsl(0 0% 0% / 0.8);
+
+    --stage-new-lead: 220 91% 64%;
+    --stage-qualification: 270 91% 65%;
+    --stage-session: 330 81% 60%;
+    --stage-negotiation: 43 96% 56%;
+    --stage-proposal: 142 76% 36%;
+    --stage-closing: 217 91% 60%;
+    --stage-won: 142 71% 45%;
+    --stage-lost: 0 84% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* OLED Utilities */
+  .font-fira-code {
+    font-family: 'Fira Code', 'JetBrains Mono', 'Fira Mono', monospace;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  @keyframes bounce-slow {
+
+    0%,
+    100% {
+      transform: translateY(-5%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 3s infinite;
+  }
+}

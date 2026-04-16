@@ -1,0 +1,7 @@
+project_id = "rkngilknpcibcwalropj"
+
+[functions.webhook-handler]
+verify_jwt = false
+
+[functions.pagarme-webhook]
+verify_jwt = false

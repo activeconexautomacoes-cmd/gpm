@@ -1,0 +1,3 @@
+-- Fix: use type='checklist' instead of template_item_id IS NOT NULL for cache calculations
+-- Applied via Supabase MCP - this file is for local tracking only
+-- See migration: fix_checklist_cache_use_type
