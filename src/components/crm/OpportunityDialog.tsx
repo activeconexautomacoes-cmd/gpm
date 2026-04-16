@@ -903,7 +903,29 @@ export function OpportunityDialog({
       toast.success("Link de pagamento gerado com sucesso!", {
         action: {
           label: "Copiar",
-          onClick: () => navigator.clipboard.writeText(data.payment_url)
+          onClick: () => {
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(data.payment_url).then(() => {
+                toast.success("Link copiado!");
+              }).catch(() => {
+                const el = document.createElement("textarea");
+                el.value = data.payment_url;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand("copy");
+                document.body.removeChild(el);
+                toast.success("Link copiado!");
+              });
+            } else {
+              const el = document.createElement("textarea");
+              el.value = data.payment_url;
+              document.body.appendChild(el);
+              el.select();
+              document.execCommand("copy");
+              document.body.removeChild(el);
+              toast.success("Link copiado!");
+            }
+          }
         }
       });
 
