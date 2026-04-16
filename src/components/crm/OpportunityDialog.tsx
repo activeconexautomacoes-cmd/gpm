@@ -3149,21 +3149,17 @@ export function OpportunityDialog({
                         {opportunity?.payment_link_url && !hasPaymentLinkValueChanged ? (
                           <div className="space-y-2">
                             <div className="flex items-center gap-2 bg-muted/30 p-2 rounded-lg border border-border">
-                              <div className="flex-1 truncate text-[10px] text-muted-foreground font-mono">
-                                {opportunity.payment_link_url}
-                              </div>
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="icon"
-                                className="h-6 w-6"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(opportunity.payment_link_url);
+                              <input
+                                readOnly
+                                value={opportunity.payment_link_url}
+                                className="flex-1 text-[10px] text-muted-foreground font-mono bg-transparent border-none outline-none cursor-pointer"
+                                onClick={(e) => {
+                                  (e.target as HTMLInputElement).select();
+                                  document.execCommand("copy");
                                   toast.success("Link copiado!");
                                 }}
-                              >
-                                <Copy className="w-3 h-3" />
-                              </Button>
+                                title="Clique para copiar"
+                              />
                               <Button
                                 type="button"
                                 variant="ghost"
