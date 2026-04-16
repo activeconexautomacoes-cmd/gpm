@@ -210,6 +210,7 @@ export function OpportunityDialog({
 
   // Closing Workflow State
   const [isGeneratingLink, setIsGeneratingLink] = useState(false);
+  const [generatedPaymentUrl, setGeneratedPaymentUrl] = useState<string | null>(null);
   const [isSendingContract, setIsSendingContract] = useState(false);
   const [isSignDialogOpen, setIsSignDialogOpen] = useState(false);
   const [d4signTemplates, setD4signTemplates] = useState<any[]>([]);
@@ -900,34 +901,8 @@ export function OpportunityDialog({
       if (error) throw error;
       if (!data.success) throw new Error(data.error || "Erro ao gerar link");
 
-      toast.success("Link de pagamento gerado com sucesso!", {
-        action: {
-          label: "Copiar",
-          onClick: () => {
-            if (navigator.clipboard) {
-              navigator.clipboard.writeText(data.payment_url).then(() => {
-                toast.success("Link copiado!");
-              }).catch(() => {
-                const el = document.createElement("textarea");
-                el.value = data.payment_url;
-                document.body.appendChild(el);
-                el.select();
-                document.execCommand("copy");
-                document.body.removeChild(el);
-                toast.success("Link copiado!");
-              });
-            } else {
-              const el = document.createElement("textarea");
-              el.value = data.payment_url;
-              document.body.appendChild(el);
-              el.select();
-              document.execCommand("copy");
-              document.body.removeChild(el);
-              toast.success("Link copiado!");
-            }
-          }
-        }
-      });
+      setGeneratedPaymentUrl(data.payment_url);
+      toast.success("Link de pagamento gerado com sucesso!");
 
       queryClient.invalidateQueries({ queryKey: ["opportunities"] });
       queryClient.invalidateQueries({ queryKey: ["opportunity", opportunity.id] });
@@ -3256,6 +3231,34 @@ export function OpportunityDialog({
                               )}
                             </Tooltip>
                           </TooltipProvider>
+                          {generatedPaymentUrl && (
+                            <div className="flex items-center gap-2 bg-muted/30 p-2 rounded-lg border border-border">
+                              <div className="flex-1 truncate text-[10px] text-muted-foreground font-mono">
+                                {generatedPaymentUrl}
+                              </div>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                className="h-6 w-6 shrink-0"
+                                onClick={() => {
+                                  navigator.clipboard.writeText(generatedPaymentUrl).then(() => {
+                                    toast.success("Link copiado!");
+                                  }).catch(() => {
+                                    const el = document.createElement("textarea");
+                                    el.value = generatedPaymentUrl;
+                                    document.body.appendChild(el);
+                                    el.select();
+                                    document.execCommand("copy");
+                                    document.body.removeChild(el);
+                                    toast.success("Link copiado!");
+                                  });
+                                }}
+                              >
+                                <Copy className="w-3 h-3" />
+                              </Button>
+                            </div>
+                          )}
                           </div>
                         )}
                       </div>
